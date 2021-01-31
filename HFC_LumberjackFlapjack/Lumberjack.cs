@@ -21,7 +21,8 @@ namespace HFC_LumberjackFlapjack
 
         public void EatFlapjack()
         {
-            Console.WriteLine($"{Name} ate a {pouch.Pop()}");
+            while (pouch.Count > 0) 
+              Console.WriteLine($"{Name} ate a {pouch.Pop().ToString().ToLower()} flapjack");
         }
     }
 

@@ -11,27 +11,33 @@ namespace HFC_LumberjackFlapjack
             Random random = new Random();
 
 
-            string nameOfLumberjack;
-            while ((nameOfLumberjack = Console.ReadLine()) !="")
+            string newName;
+            Console.WriteLine("Please enter the name of the first lumberjack");
+            while ((  newName = Console.ReadLine()) !="")
             {
-                Console.WriteLine("Please enter the lumberjack's name");
-                string nameOfLumberJack = Console.ReadLine();
-                Lumberjack newJack = new Lumberjack(nameOfLumberJack);
-                Console.WriteLine("How many flapjacks does he have?");
+
+                Console.WriteLine("How many flapjacks does he have? ");
                 string repliedNumber = Console.ReadLine();
-                if (int.TryParse(repliedNumber, out int noOfFJacks)
+                if (int.TryParse(repliedNumber, out int noOfFJacks))
                 {
+                    Lumberjack newJack = new Lumberjack(newName);
+
                     for (int i = 0; i <= noOfFJacks; i++)
                     {
-
+                        newJack.StashFlapjack((Flapjack)random.Next(0, 4));
                     }
-                        
+                    logBoyz.Enqueue(newJack);                        
                 }
+                Console.Write("Next lumberjack's name: (blank to end)");
+            }
 
+            while (logBoyz.Count > 0)
+            {
+               Lumberjack nextJack = logBoyz.Dequeue();
+                nextJack.EatFlapjack();
             }
             
 
-            Console.WriteLine("Hello World!");
         }
     }
 }
